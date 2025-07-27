@@ -158,8 +158,23 @@ echo "🎉 Modpack install complete for world: $SERVER_WORLDNAME – $(find "$MO
 
 # --- Enable spawn‑debug on first install ------------------------------------
 CFG=/data/config/cobblemon/main.json
-jq '.exportSpawnConfig = true' "$CFG" | sponge "$CFG"
+if [ -f "$CFG" ]; then
+  TMP_CFG="${CFG}.tmp"
+  jq '.exportSpawnConfig = true' "$CFG" > "$TMP_CFG" && mv "$TMP_CFG" "$CFG"
+  echo "🔧   Set exportSpawnConfig=true (will generate Best‑Spawner config on first boot)"
+else
+  echo "⚠️  $CFG not found — skipping exportSpawnConfig update"
+fi
+
 echo "🔧   Set exportSpawnConfig=true (will generate Best‑Spawner config on first boot)"
 
 
-touch "$READY_FILE"
+echo "DEBUG: About to create ready file at: $READY_FILE"
+ls -ld "$(dirname "$READY_FILE")"
+echo "SERVER_WORLDNAME is: '$SERVER_WORLDNAME'"
+
+# optional: wrap in quotes and fail visibly
+if ! touch "$READY_FILE"; then
+  echo "❌ Failed to create $READY_FILE"
+  exit 1
+fi
