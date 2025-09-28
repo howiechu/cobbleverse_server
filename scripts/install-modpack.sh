@@ -1,32 +1,98 @@
 #!/bin/sh
+
 set -e
 
 # ---- install-modpack.sh ---------------------------------------------------
 # Installs a Modrinth .mrpack into /modpack, copies the server‑side bits into
+
 # /data, fixes permissions so the MC runtime user can read everything, and
 # marks completion with a world‑specific .ready flag.
+
+
 # ---------------------------------------------------------------------------
 
-apk add --no-cache jq wget unzip rsync > /dev/null
+apk add --no-cache jq wget unzip moreutils rsync > /dev/null
+
+
 
 MODPACK_DIR=/modpack
+
+
+
+
 TEMP_DIR="$MODPACK_DIR/temp"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 MRPACK_PATH="$MODPACK_DIR/pack.mrpack"
+
+
+
+
+
+
+
+
+
+
+
+
 READY_FILE="$MODPACK_DIR/.ready-${SERVER_WORLDNAME}"
+
+
+
+
+
+
+
+
+
+
 DATA_DIR=/data
 
+
 MC_UID=${MC_UID:-1000}
+
+
 MC_GID=${MC_GID:-1000}
+
+
 
 # ---------------------------------------------------------------------------
 # Early‑exit if this world was already prepared
 # ---------------------------------------------------------------------------
 if [ -f "$READY_FILE" ]; then
+
+
   echo "✅ Modpack already installed for world: $SERVER_WORLDNAME"
+
+
+
   exit 0
 fi
 
+
 cd "$MODPACK_DIR"
+
+
+
 
 echo "🧹 Cleaning previous temp / mods folders…"
 rm -rf "$TEMP_DIR" "$MODPACK_DIR/mods"
@@ -163,3 +229,18 @@ echo "🔧   Set exportSpawnConfig=true (will generate Best‑Spawner config on 
 
 
 touch "$READY_FILE"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
