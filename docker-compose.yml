@@ -5,6 +5,7 @@ services:
 
 
 
+
     user: "0:0"
     build:
       context: .
@@ -20,6 +21,8 @@ services:
 
 
   mc:
+
+
 
 
 
@@ -42,7 +45,7 @@ services:
       DEBUG: ${DEBUG:-False}
       SERVER_NAME: ${SERVER_NAME_-Cobbleverse}
       ICON: ${SERVER_ICON:-}
-      ALLOW_FLIGHT: ${ALLOW_FLIGHT:-False}
+      ALLOW_FLIGHT: ${ALLOW_FLIGHT:-True}
       SPAWN_MONSTERS: ${SPAWN_MONSTERS:-False}
 
 
@@ -63,6 +66,25 @@ networks:
   default:
     name: npm_default
     external: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
