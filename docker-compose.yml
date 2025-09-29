@@ -4,6 +4,7 @@ services:
 
 
 
+
     user: "0:0"
     build:
       context: .
@@ -23,13 +24,17 @@ services:
 
 
 
+
+
     image: itzg/minecraft-server
     environment:
       EULA: "true"
       TYPE: "FABRIC"
       VERSION: "1.21.1"
-      FABRIC_LOADER_VERSION: "latest"
-      FABRIC_LAUNCHER_VERSION: "latest"
+      FABRIC_LOADER_VERSION: "0.17.2"
+
+      FABRIC_LAUNCHER_VERSION: "1.1.0"
+
       MEMORY: "4G"
       SERVER_WORLDNAME: ${SERVER_WORLDNAME:-Zoo}
       LEVEL: ${SERVER_WORLDNAME:-Zoo}
@@ -58,6 +63,26 @@ networks:
   default:
     name: npm_default
     external: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
